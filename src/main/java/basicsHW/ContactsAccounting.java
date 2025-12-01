@@ -56,7 +56,28 @@ public class ContactsAccounting {
             System.out.println("Контакт добавлен.");
         }
 
+        private static void listContacts() {
+            if (contactCount == 0) {
+                System.out.println("Список контактов пуст.");
+            } else {
+                System.out.println("Список контактов:");
+                for (int i = 0; i < contactCount; i++) {
+                    System.out.println(names[i] + " - " + phoneNumbers[i]);
+                }
+            }
+        }
 
+        private static void searchContact() {
+            System.out.print("Введите имя для поиска: ");
+            String nameToSearch = scanner.nextLine();
+            for (int i = 0; i < contactCount; i++) {
+                if (names[i].equalsIgnoreCase(nameToSearch)) {
+                    System.out.println("Найден контакт: " + names[i] + " - " + phoneNumbers[i]);
+                    return;
+                }
+            }
+            System.out.println("Контакт не найден.");
+        }
 
     }
 }
