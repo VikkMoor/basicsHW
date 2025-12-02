@@ -23,23 +23,15 @@ public class ContactsAccounting {
             scanner.nextLine(); // очистка буфера
 
             switch (choice) {
-                case 1:
-                    addContact();
-                    break;
-                case 2:
-                    listContacts();
-                    break;
-                case 3:
-                    searchContact();
-                    break;
-                case 4:
-                    removeContact();
-                    break;
-                case 5:
+                case 1 -> addContact();
+                case 2 -> listContacts();
+                case 3 -> searchContact();
+                case 4 -> removeContact();
+                case 5 -> {
                     System.out.println("Завершение работы.");
                     return;
-                default:
-                    System.out.println("Выберите вариант из предложенных");
+                }
+                default -> System.out.println("Выберите вариант из предложенных");
             }
         }
     }
