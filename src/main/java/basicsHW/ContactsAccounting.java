@@ -3,13 +3,13 @@ package basicsHW;
 import java.util.Scanner;
 
 public class ContactsAccounting {
+    private static int capacity = 50;
+    private static int contactCount = 0;
+    private static  String[] names = new String[capacity];
+    private static  String[] phoneNumbers = new String[capacity];
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int capacity = 50;
-        int contactCount = 0;
-        String[] names = new String[capacity];
-        String[] phoneNumbers = new String[capacity];
 
         while (true) {
             System.out.println("\nМеню:");
@@ -42,42 +42,60 @@ public class ContactsAccounting {
                     System.out.println("Выберите вариант из предложенных");
             }
         }
+    }
 
-        public void addContact() {
-            if (contactCount >= capacity) {
-                System.out.println("Достигнуто максимальное количество контактов.");
+    public static void addContact() {
+        if (contactCount >= capacity) {
+            System.out.println("Достигнуто максимальное количество контактов.");
+            return;
+        }
+        System.out.print("Введите имя контакта: ");
+        names[contactCount] = scanner.nextLine();
+        System.out.print("Введите телефонный номер: ");
+        phoneNumbers[contactCount] = scanner.nextLine();
+        contactCount++;
+        System.out.println("Контакт добавлен.");
+    }
+    public static void listContacts() {
+        if (contactCount == 0) {
+            System.out.println("Список контактов пуст.");
+        } else {
+            System.out.println("Список контактов:");
+            for (int i = 0; i < contactCount; i++) {
+                System.out.println(names[i] + " - " + phoneNumbers[i]);
+            }
+        }
+    }
+    public static void searchContact() {
+        System.out.print("Введите имя для поиска: ");
+        String nameToSearch = scanner.nextLine();
+        for (int i = 0; i < contactCount; i++) {
+            if (names[i].equalsIgnoreCase(nameToSearch)) {
+                System.out.println("Найден контакт: " + names[i] + " - " + phoneNumbers[i]);
                 return;
             }
-            System.out.print("Введите имя контакта: ");
-            names[contactCount] = scanner.nextLine();
-            System.out.print("Введите телефонный номер: ");
-            phoneNumbers[contactCount] = scanner.nextLine();
-            contactCount++;
-            System.out.println("Контакт добавлен.");
         }
+        System.out.println("Контакт не найден.");
+    }
 
-        private static void listContacts() {
-            if (contactCount == 0) {
-                System.out.println("Список контактов пуст.");
-            } else {
-                System.out.println("Список контактов:");
-                for (int i = 0; i < contactCount; i++) {
-                    System.out.println(names[i] + " - " + phoneNumbers[i]);
+    private static void removeContact() {
+        System.out.print("Введите имя контакта для удаления: ");
+        String nameToRemove = scanner.nextLine();
+        for (int i = 0; i < contactCount; i++) {
+            if (names[i].equalsIgnoreCase(nameToRemove)) {
+                // Сдвигаем элементы влево, чтобы избавиться от удаляемого контакта
+                for (int j = i; j < contactCount - 1; j++) {
+                    names[j] = names[j + 1];
+                    phoneNumbers[j] = phoneNumbers[j + 1];
                 }
+                contactCount--;
+                names[contactCount] = null; // Очистка последнего элемента
+                phoneNumbers[contactCount] = null;
+                System.out.println("Контакт удален.");
+                return;
             }
         }
-
-        private static void searchContact() {
-            System.out.print("Введите имя для поиска: ");
-            String nameToSearch = scanner.nextLine();
-            for (int i = 0; i < contactCount; i++) {
-                if (names[i].equalsIgnoreCase(nameToSearch)) {
-                    System.out.println("Найден контакт: " + names[i] + " - " + phoneNumbers[i]);
-                    return;
-                }
-            }
-            System.out.println("Контакт не найден.");
-        }
-
+        System.out.println("Контакт не найден.");
     }
 }
+
