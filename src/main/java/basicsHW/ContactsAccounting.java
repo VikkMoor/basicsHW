@@ -19,9 +19,22 @@ public class ContactsAccounting {
             System.out.println("4. Удалить контакт");
             System.out.println("5. Выйти");
             System.out.print("Выберите действие: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // очистка буфера
+            
+            int choice = -1;
+            boolean validInput = false;
 
+            // Валидация ввода
+            while (!validInput) {
+                try {
+                    choice = scanner.nextInt();
+                    validInput = true; // ввод успешен
+                } catch (InputMismatchException e) {
+                    System.out.println("Ошибка: введите число от 1 до 5.");
+                    scanner.next(); // очистка недопустимого ввода
+                }
+            }
+            scanner.nextLine(); // очистка буфера
+            
             switch (choice) {
                 case 1 -> addContact();
                 case 2 -> listContacts();
