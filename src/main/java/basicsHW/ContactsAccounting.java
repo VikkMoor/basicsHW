@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class ContactsAccounting {
     private static int capacity = 50;
     private static int contactCount = 0;
-    private static  String[] names = new String[capacity];
-    private static  String[] phoneNumbers = new String[capacity];
+    private static String[] names = new String[capacity];
+    private static String[] phoneNumbers = new String[capacity];
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
